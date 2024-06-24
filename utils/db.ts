@@ -154,14 +154,13 @@ export async function getBookableLocations() {
 export type Guest = {
   "Full name": string;
   Email: string;
-  "Manifest ticket type": string;
   ID: string;
 };
 export async function getGuests() {
   const guests: Guest[] = [];
   await base("Guest list")
     .select({
-      fields: ["Full name", "Email", "Manifest ticket type", "ID"],
+      fields: ["Full name", "Email", "ID"],
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {
@@ -177,7 +176,7 @@ export async function getGuestsByEvent(eventName: string) {
   await base("Guest list")
     .select({
       view: eventName,
-      fields: ["Full name", "Email", "Manifest ticket type", "ID"],
+      fields: ["Full name", "Email", "ID"],
     })
     .eachPage(function page(records: any, fetchNextPage: any) {
       records.forEach(function (record: any) {
